@@ -4,10 +4,10 @@ import "./index.css";
 
 export default class NewCard extends Component {
         render(){
-            const {content={}} = this.props;  
+            const {content={}} = this.props; 
         return(
          <div className="card">
-            {content.response !== undefined &&content.response.docs.map(i=>{
+            {content !== undefined &&content.map(i=>{
                let url;
                let url2=i.web_url;
               if(i.multimedia.length !==0){url=`https://www.nytimes.com/${i.multimedia[1].url}`}

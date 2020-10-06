@@ -3,54 +3,68 @@ import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
 import {pageData} from "../../api_helper/slice/homeSlice";
 import {Menu,Loader} from "../../component";
-import ReactPaginate from "react-paginate";
 import "./index.scss";
+import InfiniteScroll from "react-infinite-scroll-component";
  const NewCard =lazy(()=>import("../../component/newcard"));
+ 
 class Home extends Component{
     constructor(props){
         super(props);
         this.state ={
+          Data:[],
            page:0,
-           offset:false,
-           processing:false
+           loadmore:true
+            
         }
-    }
-    rendernextpage=()=>{
-        const {dispatch}=this.props;
-        let pages=this.state.page
-           dispatch(pageData(pages))
-           this.setState({offset:false})
-      }
-    handlePageChange=pageNumber=>{
-        let pages=pageNumber.selected
-         this.setState({page:pages,offset:true})
-    }
+    }    
     componentDidMount(){
         const {page}=this.state;
         const {dispatch}=this.props;
-        dispatch(pageData(page))
+        dispatch(pageData(page));
+       
+    }
+    fetchMoreData = () => {
+        const {dispatch}=this.props;
+          let pages=this.state.page +1;
+           setTimeout(() => { dispatch(pageData(pages)) },150);
+            this.setState({page:pages})
+        };
+    
+    componentDidUpdate(prevProps){
+        let newProps =this.props;
+        let datas=[]
+         let propsChanged =prevProps.home.status !==newProps.home.status;
+         if(newProps.home.status ==="Success" && propsChanged){
+             let data=newProps.home.datas;
+             if(this.state.page===0){
+                datas=[...datas,data]
+             this.setState({
+                 Data:[...datas]
+             })}
+             else{
+            this.setState({
+                Data:this.state.Data.concat(data)
+            })
+        }
+         }
     }
 
     render(){
-        const {home}=this.props;
+        const{Data}=this.state;
         return(
         <div>
-            <Menu/>
+            <Menu/> 
             <Suspense fallback={<Loader/>}>
-              <NewCard content={home.datas}/>
-              </Suspense>
-
- 
-          <div className="pagination">
-            <ReactPaginate
-            previousLabel={'previous'}
-            nextLabel={'next'}
-            marginPagesDisplayed={0}
-            pageRangeDisplayed={0}
-            onPageChange={this.handlePageChange}
-            disableInitialCallback={false}/> 
-          </div>
-           {this.state.offset===true && this.rendernextpage()}
+            <InfiniteScroll
+            dataLength={this.state.Data.length}
+            next={this.fetchMoreData}
+            hasMore={true}
+            loader={<h1>Still Loading...</h1>}
+            
+          >
+            {Data.map(i=>{ return(<NewCard content={i.response.docs}/>)})}
+            </InfiniteScroll>
+            </Suspense>
         </div>
         )
     }
