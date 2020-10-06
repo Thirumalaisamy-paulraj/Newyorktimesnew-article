@@ -7,7 +7,7 @@ export default class Menu extends Component{
         return(
             <div style={{backgroundColor:"#fff"}}>
                 <header className="header">
-                    <a href="/"><img className="logo" style={{color:"#000"}} src={logo}/></a>
+                    <a href="/"><img className="logo" alt="Home" style={{color:"#000"}} src={logo}/></a>
                 </header>
             </div>
         )

@@ -16,7 +16,7 @@ export default class NewCard extends Component {
               <div className="product-card">
                <div className="badge">{i.news_desk}</div>
 		        <div className="product-tumb">
-			      <img src={url}alt=""/>
+			      <img src={url}alt="News"/>
 		        </div>
 		        <div className="product-details">
 			    <h4><a href={url2}>{i.headline.main}</a></h4>
