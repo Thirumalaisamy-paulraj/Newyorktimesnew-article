@@ -1,0 +1,27 @@
+.header {
+    color:black;
+    position:fixed;
+    width: 100%;
+    background-color:#000;
+    top: 0;
+    left: 0;
+    align-items: center;
+    height: 64px;
+    z-index: 1000;
+  }
+  .header .logo {
+  margin-top: 5px;
+  width:fit-content;
+  margin-left: 50px;
+  margin-right: 50px;
+
+  }
+
+  
+  @media (max-width:768px){
+    .header .logo {
+      margin-left:auto;
+      margin-right: auto ;
+      height:60px;
+    }
+  }
