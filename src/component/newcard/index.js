@@ -15,7 +15,6 @@ export default class NewCard extends Component {
               return(
               <div className="product-card">
                <div className="badge">{i.news_desk}</div>
-                <div className="badge-left"><i class="material-icons">favorite_border</i></div>
 		        <div className="product-tumb">
 			      <img src={url}alt="News"/>
                   <a href={url2}><div className="middle">
@@ -27,8 +26,10 @@ export default class NewCard extends Component {
 			    <h4><a href={url2}>{i.headline.main}</a></h4>
                 <span className="product-catagory">{i.byline.original}</span>
                 <p>{i.abstract}</p>
-				<div className="product-links">
+				
+              <div className="product-links">
                 <a href={url2}><button className="product-more">Read More</button></a>
+                <i class="material-icons">favorite_border</i>
 			  </div>
 			 </div>
              </div>

@@ -14,7 +14,6 @@ const App=({store})=> {
   </Switch>
   </Suspense>
   </BrowserRouter>
-
   </Provider>
   );
 }

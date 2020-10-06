@@ -141,6 +141,16 @@ a{
     text-decoration: none;
 }
 
+.product-links  {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.product-links i {
+   vertical-align: middle;
+   padding-right: 10px;
+   cursor: pointer;
+}
 @media (max-width:600px){
     .card{
         grid-template-columns: repeat(1,0.1fr);
