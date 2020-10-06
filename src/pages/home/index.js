@@ -1,11 +1,11 @@
-import React,{Component} from 'react';
+import React,{Component,Suspense,lazy} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
 import {pageData} from "../../api_helper/slice/homeSlice";
-import {NewCard,Menu,Loader} from "../../component";
+import {Menu,Loader} from "../../component";
 import ReactPaginate from "react-paginate";
 import "./index.scss";
-
+ const NewCard =lazy(()=>import("../../component/newcard"));
 class Home extends Component{
     constructor(props){
         super(props);
@@ -36,12 +36,11 @@ class Home extends Component{
         return(
         <div>
             <Menu/>
-            {home.status === "Request" &&<Loader/>}
-            {home.status === "Success" && 
-            <div> 
+            <Suspense fallback={<Loader/>}>
               <NewCard content={home.datas}/>
-            </div>
-            }
+              </Suspense>
+
+ 
           <div className="pagination">
             <ReactPaginate
             previousLabel={'previous'}

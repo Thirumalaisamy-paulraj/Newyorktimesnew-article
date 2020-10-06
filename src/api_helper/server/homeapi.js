@@ -11,6 +11,8 @@ function search(page){
             "Content-Type":"application/json"
         },
     }
+    //uuTCgkUlFyAK4JnFhQ5SjyFjEJ3Eruh1
+    //
     let url=`https://api.nytimes.com/svc/search/v2/articlesearch.json?&page=${page}&api-key=uuTCgkUlFyAK4JnFhQ5SjyFjEJ3Eruh1`
 
     return fetch(`${url}`,requestOptions).then(httpClient.handleResponse);
